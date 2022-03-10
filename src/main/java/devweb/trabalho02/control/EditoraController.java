@@ -5,16 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-class HomeController {
+class EditoraController {
 
   /*
    * Obs.: retirando os comentários do código, ao fazer o logout
    * você será redirecionado para a tela de login novamente.
    */
-  @GetMapping(" /")
+  @GetMapping("/editora")
   String index(Authentication a) {
     if (a != null)
-      return "index.html";
+      return "editora.html";
     return "redirect:oauth2/authorization/cognito";
   }
 }

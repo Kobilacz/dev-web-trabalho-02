@@ -31,7 +31,8 @@ public class ArtigoController {
   @PostMapping("/artigos")
   public ResponseEntity<Artigo> createArtigo(@RequestBody Artigo art) {
     try {
-      Artigo _art = artRep.save(new Artigo(art.getTitulo(), art.getResumo(), art.getPublicado()));
+      // art.getPublicado()
+      Artigo _art = artRep.save(new Artigo(art.getTitulo(), art.getResumo(), true));
       return new ResponseEntity<>(_art, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
