@@ -15,28 +15,40 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="artigos.css" />
   </head>
   <body>
     <tr th:if="${artigos.empty}">
       <td colspan="2">Nenhum artigo cadastrado!</td>
     </tr>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Título</th>
-          <th scope="col">Resumo</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="artigo : ${artigos}">
-          <td th:text="${artigo.id}"></td>
-          <td th:text="${artigo.titulo}"></td>
-          <td th:text="${artigo.resumo}"></td>
-          <td th:text="${artigo.publicado} ? 'Publicado' : 'Não publicado' "></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="artigos-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Título</th>
+            <th scope="col">Resumo</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="artigo : ${artigos}">
+            <td th:text="${artigo.id}"></td>
+            <td th:text="${artigo.titulo}"></td>
+            <td th:text="${artigo.resumo}"></td>
+            <td th:text="${artigo.publicado} ? 'Publicado' : 'Não publicado' "></td>
+            <td>
+              <a th:href="@{'/editora/artigos/'+ ${artigo.id}}">Visualizar</a>
+              <a th:href="@{'/editora/artigos/excluir/'+ ${artigo.id}}">Excluir</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <a class="btn btn-primary" th:href="@{/editora/artigos/excluir-todos}">Excluir todos</a>
+        <a class="btn btn-primary" th:href="@{/editora}">Voltar</a>
+      </div>
+    </div>
   </body>
 </html>

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Optional;
 
 import devweb.trabalho02.model.Artigo;
@@ -32,7 +34,7 @@ class EditoraController {
   public String registerForm(Authentication a, @ModelAttribute("artigo") Artigo artigo) {
     if (a != null) {
       artRep.save(artigo);
-      return "editora";
+      return "redirect:/editora/artigos";
     }
 
     return "redirect:oauth2/authorization/cognito";
@@ -57,7 +59,26 @@ class EditoraController {
       model.addAttribute("artigo", data.get());
       return "artigo";
     } else {
-      return "listArtigo";
+      return "listArtigos";
     }
   }
+
+  @RequestMapping("/editora/artigos/excluir/{id}")
+  public String deleteById(Authentication a, Model model, @PathVariable("id") long id) {
+    if (a == null)
+      return "redirect:oauth2/authorization/cognito";
+
+    artRep.deleteById(id);
+    return "redirect:/editora/artigos";
+  }
+
+  @RequestMapping("/editora/artigos/excluir-todos")
+  public String deleteAll(Authentication a) {
+    if (a == null)
+      return "redirect:oauth2/authorization/cognito";
+
+    artRep.deleteAll();
+    return "redirect:/editora/artigos";
+  }
+
 }
