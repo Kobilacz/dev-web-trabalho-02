@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import java.util.Optional;
 
 import devweb.trabalho02.model.Artigo;
 import devweb.trabalho02.repository.ArtigoRepository;
@@ -16,10 +18,6 @@ class EditoraController {
   @Autowired
   ArtigoRepository artRep;
 
-  /*
-   * Obs.: retirando os comentários do código, ao fazer o logout
-   * você será redirecionado para a tela de login novamente.
-   */
   @GetMapping("/editora")
   public String showForm(Authentication a, Model model) {
     Artigo artigo = new Artigo();
@@ -38,5 +36,28 @@ class EditoraController {
     }
 
     return "redirect:oauth2/authorization/cognito";
+  }
+
+  @GetMapping("/editora/artigos")
+  public String showAll(Authentication a, Model model) {
+    model.addAttribute("artigos", artRep.findAll());
+    if (a != null)
+      return "listArtigos";
+
+    return "redirect:oauth2/authorization/cognito";
+  }
+
+  @GetMapping("/editora/artigos/{id}")
+  public String showById(Authentication a, Model model, @PathVariable("id") long id) {
+    if (a == null)
+      return "redirect:oauth2/authorization/cognito";
+
+    Optional<Artigo> data = artRep.findById(id);
+    if (data.isPresent()) {
+      model.addAttribute("artigo", data.get());
+      return "artigo";
+    } else {
+      return "listArtigo";
+    }
   }
 }
