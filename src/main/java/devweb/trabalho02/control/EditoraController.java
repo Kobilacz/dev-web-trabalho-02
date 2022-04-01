@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -41,12 +42,18 @@ class EditoraController {
   }
 
   @GetMapping("/editora/artigos")
-  public String showAll(Authentication a, Model model) {
-    model.addAttribute("artigos", artRep.findAll());
-    if (a != null)
-      return "listArtigos";
+  public String showAll(Authentication a, Model model, @RequestParam(required = false) String publicado) {
+    if (a == null)
+      return "redirect:oauth2/authorization/cognito";
+      
+    if (publicado == null) {
+      model.addAttribute("artigos", artRep.findAll());
+    } else {
+      model.addAttribute("artigos", artRep.findByPublicado(Boolean.parseBoolean(publicado)));
+    }
 
-    return "redirect:oauth2/authorization/cognito";
+    return "listArtigos";
+
   }
 
   @GetMapping("/editora/artigos/{id}")
