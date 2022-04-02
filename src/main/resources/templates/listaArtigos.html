@@ -15,14 +15,23 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="artigos.css" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/shared.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/artigos.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <tr th:if="${artigos.empty}">
       <td colspan="2">Nenhum artigo cadastrado!</td>
     </tr>
-    <div class="artigos-container">
-      <table class="table">
+    <div class="container">
+      <h2>Artigos</h2>
+      <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -45,9 +54,9 @@
           </tr>
         </tbody>
       </table>
-      <div>
-        <a class="btn btn-primary" th:href="@{/editora/artigos/excluir-todos}">Excluir todos</a>
+      <div class="buttons-container">
         <a class="btn btn-primary" th:href="@{/editora}">Voltar</a>
+        <a class="btn btn-primary" th:href="@{/editora/artigos/excluir-todos}">Excluir todos</a>
       </div>
     </div>
   </body>

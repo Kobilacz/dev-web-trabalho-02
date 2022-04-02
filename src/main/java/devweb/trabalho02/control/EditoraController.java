@@ -45,14 +45,14 @@ class EditoraController {
   public String showAll(Authentication a, Model model, @RequestParam(required = false) String publicado) {
     if (a == null)
       return "redirect:oauth2/authorization/cognito";
-      
+
     if (publicado == null) {
       model.addAttribute("artigos", artRep.findAll());
     } else {
       model.addAttribute("artigos", artRep.findByPublicado(Boolean.parseBoolean(publicado)));
     }
 
-    return "listArtigos";
+    return "listaArtigos";
 
   }
 
@@ -66,7 +66,7 @@ class EditoraController {
       model.addAttribute("artigo", data.get());
       return "artigo";
     } else {
-      return "listArtigos";
+      return "listaArtigos";
     }
   }
 
