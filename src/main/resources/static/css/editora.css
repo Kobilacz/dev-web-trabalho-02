@@ -4,5 +4,11 @@
 
 .submit-button-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+.index-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
