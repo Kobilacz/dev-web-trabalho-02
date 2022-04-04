@@ -33,7 +33,7 @@ public class ArtigoController {
   public ResponseEntity<Artigo> createArtigo(@ModelAttribute("artigo") Artigo art) {
     try {
 
-      Artigo _art = artRep.save(new Artigo(art.getTitulo(), art.getResumo(), art.getPublicado()));
+      Artigo _art = artRep.save(new Artigo(art.getTitulo(), art.getResumo(), art.isPublicado()));
 
       return new ResponseEntity<>(_art, HttpStatus.CREATED);
     } catch (Exception e) {
@@ -80,7 +80,7 @@ public class ArtigoController {
     Optional<Artigo> data = artRep.findById(id);
     if (data.isPresent()) {
       Artigo ar = data.get();
-      ar.setPublicado(art.getPublicado());
+      ar.setPublicado(art.isPublicado());
       ar.setResumo(art.getResumo());
       ar.setTitulo(art.getTitulo());
 

@@ -54,7 +54,7 @@ public class Artigo {
     this.resumo = resumo;
   }
 
-  public boolean getPublicado() {
+  public boolean isPublicado() {
     return publicado;
   }
 
