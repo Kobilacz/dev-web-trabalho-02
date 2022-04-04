@@ -38,7 +38,7 @@
             <th scope="col">Título</th>
             <th scope="col">Resumo</th>
             <th scope="col">Status</th>
-            <th scope="col">Ação</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -48,8 +48,8 @@
             <td th:text="${artigo.resumo}"></td>
             <td th:text="${artigo.publicado} ? 'Publicado' : 'Não publicado' "></td>
             <td>
-              <a th:href="@{'/editora/artigos/'+ ${artigo.id}}">Visualizar</a>
-              <a th:href="@{'/editora/artigos/excluir/'+ ${artigo.id}}">Excluir</a>
+              <a th:href="@{'/editora/artigos/' + ${artigo.id}}" class="btn btn-primary">Alterar</a>
+              <a th:href="@{'/editora/artigos/excluir/'+ ${artigo.id}}" class="btn btn-danger">Excluir</a>
             </td>
           </tr>
         </tbody>
