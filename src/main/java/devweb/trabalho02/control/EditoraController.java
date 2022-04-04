@@ -22,23 +22,28 @@ class EditoraController {
   ArtigoRepository artRep;
 
   @GetMapping("/editora")
-  public String showForm(Authentication a, Model model) {
+  public String home(Authentication a) {
+    return "home";
+  }
+
+  @GetMapping("/editora/criar")
+  public String createForm(Authentication a, Model model) {
     Artigo artigo = new Artigo();
     model.addAttribute("artigo", artigo);
+    System.out.println(artigo);
     if (a != null)
-      return "editora";
+      return "form";
 
     return "redirect:oauth2/authorization/cognito";
   }
 
-  @PostMapping("/editora")
-  public String registerForm(Authentication a, @ModelAttribute("artigo") Artigo artigo) {
-    if (a != null) {
-      artRep.save(artigo);
-      return "redirect:/editora/artigos";
+  @PostMapping("/editora/salvar")
+  public String editForm(Authentication a, @ModelAttribute("artigo") Artigo artigo) {
+    if (a == null) {
+      return "redirect:oauth2/authorization/cognito";
     }
-
-    return "redirect:oauth2/authorization/cognito";
+    artRep.save(artigo);
+    return "redirect:/editora/artigos";
   }
 
   @GetMapping("/editora/artigos")
@@ -64,7 +69,7 @@ class EditoraController {
     Optional<Artigo> data = artRep.findById(id);
     if (data.isPresent()) {
       model.addAttribute("artigo", data.get());
-      return "artigo";
+      return "form";
     } else {
       return "listaArtigos";
     }
