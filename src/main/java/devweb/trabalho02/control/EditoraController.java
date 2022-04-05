@@ -38,10 +38,15 @@ class EditoraController {
   }
 
   @PostMapping("/editora/salvar")
-  public String editForm(Authentication a, @ModelAttribute("artigo") Artigo artigo) {
+  public String editForm(Authentication a, @ModelAttribute("artigo") Artigo artigo, @RequestParam(required = false) String id) {
     if (a == null) {
       return "redirect:oauth2/authorization/cognito";
     }
+
+    if (id != null) {
+      artigo.setId(new Long(id));
+    }
+
     artRep.save(artigo);
     return "redirect:/editora/artigos";
   }
