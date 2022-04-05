@@ -30,7 +30,7 @@ class EditoraController {
   public String createForm(Authentication a, Model model) {
     Artigo artigo = new Artigo();
     model.addAttribute("artigo", artigo);
-    System.out.println(artigo);
+    
     if (a != null)
       return "form";
 
