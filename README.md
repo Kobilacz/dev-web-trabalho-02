@@ -1,4 +1,6 @@
-Alunos: Guilherme Müller, Luiz Gustavo Kobilacz e Rafael Hiro Kato Kawakami
+## Desenvolvimento Web - Trabalho 01
+
+### **Alunos**: Luiz Gustavo Kobilacz, Luciano Folmer Gasparello e Rafael Hiro Kato Kawakami
 
 A classe **artigo** possui os atributos: **id**, que é um atributo tipo long e identificador e único para cada artigo, **titulo** e **resumo** são atributos String, enquanto o atributo **publicado** é boolean e indica se determinado artigo está publicado ou não. Cada um dos atributos também possui métodos **GET** e **SET** para atualizar e recuperar esses atributos respoectivamente. A classe também possui uma função **toString**, que irá concatenar os atributos em forma de String. A classe também conta com dois construtores: um vazio e outro que irá realizar o set dos atributos titulo, resumo e publicado.
 
